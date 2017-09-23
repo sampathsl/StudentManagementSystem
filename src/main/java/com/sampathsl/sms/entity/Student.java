@@ -14,31 +14,28 @@ public class Student extends BaseEntity implements Serializable {
 	private String dob;
 	private Integer age;
 	private String gender;
-	private Long yearEnrolled;
 	
 	protected Student() {
         super();
     }
     
 	public Student(String firstName,String lastName,String dob,
-    		Integer age,String gender,Long yearEnrolled) {
+    		Integer age,String gender) {
     	this.firstName = firstName;
     	this.lastName = lastName;
     	this.dob = dob;
     	this.age = age;
     	this.gender = gender;
-    	this.yearEnrolled = yearEnrolled;
     }
     
-    public Student(UUID id,String firstName,String lastName,String dob,
-    		Integer age,String gender,Long yearEnrolled) {
+    public Student(String id,String firstName,String lastName,String dob,
+    		Integer age,String gender) {
     	super(id);
     	this.firstName = firstName;
     	this.lastName = lastName;
     	this.dob = dob;
     	this.age = age;
     	this.gender = gender;
-    	this.yearEnrolled = yearEnrolled;
     }
 
 	public String getFirstName() {
@@ -81,12 +78,15 @@ public class Student extends BaseEntity implements Serializable {
 		this.gender = gender;
 	}
 
-	public Long getYearEnrolled() {
-		return yearEnrolled;
-	}
-
-	public void setYearEnrolled(Long yearEnrolled) {
-		this.yearEnrolled = yearEnrolled;
+	@Override
+	public String toString() {
+		return "Student{" +
+				"firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", dob='" + dob + '\'' +
+				", age=" + age +
+				", gender='" + gender + '\'' +
+				'}';
 	}
 
 }

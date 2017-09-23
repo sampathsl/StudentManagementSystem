@@ -10,11 +10,11 @@ public abstract class BaseEntity implements Serializable {
 	private static final long serialVersionUID = 15235215235123543L;
 	
 	@Id
-    private UUID id;
+    private String id;
 
 	protected BaseEntity() {}
 	
-	protected BaseEntity(UUID id) {
+	protected BaseEntity(String id) {
 		this.id = id;
 	}
 
@@ -43,7 +43,7 @@ public abstract class BaseEntity implements Serializable {
 		return true;
 	}
 
-	public UUID getId() {
+	public String getId() {
 		return id;
 	}
 

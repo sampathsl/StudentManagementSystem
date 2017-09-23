@@ -55,7 +55,7 @@ public class StudentServiceImpl implements StudentService {
 		StudentDTO merged = mergeObjectData(newStudentDTO, oldStudentDTO);
 		Student updatedStudent = new Student(merged.getId(),merged.getFirstName(),
 				merged.getLastName(),merged.getDob(),
-				merged.getAge(),merged.getGender(),merged.getYearEnrolled());
+				merged.getAge(),merged.getGender());
 		Student updated = studentRepository.save(updatedStudent);
         return convertToDTO(updated);
 	}
@@ -97,29 +97,36 @@ public class StudentServiceImpl implements StudentService {
 	    	Student oldStudent = findStudentById(studentDTO.getId().toString());
 	    	if(oldStudent != null){
 	    		student = new Student(studentDTO.getId(),studentDTO.getFirstName(),
-	    				studentDTO.getLastName(),studentDTO.getDob(),studentDTO.getAge(),studentDTO.getGender(),studentDTO.getYearEnrolled());
+	    				studentDTO.getLastName(),studentDTO.getDob(),studentDTO.getAge(),studentDTO.getGender());
 	    	} else {
 	    		student = new Student(studentDTO.getFirstName(),studentDTO.getLastName(),studentDTO.getDob(),
-	    				studentDTO.getAge(),studentDTO.getGender(),studentDTO.getYearEnrolled());
+	    				studentDTO.getAge(),studentDTO.getGender());
 	    	}
 	    }
 	    else {
 	    	student = new Student(studentDTO.getFirstName(),studentDTO.getLastName(),studentDTO.getDob(),
-    				studentDTO.getAge(),studentDTO.getGender(),studentDTO.getYearEnrolled());
+    				studentDTO.getAge(),studentDTO.getGender());
 	    }
-	    
-	    return student;
+
+		System.out.println("student :: " + student);
+		return student;
 	    
 	}
-	
+
+	/**
+	 * Merging same old and new object data
+	 * If new object element are null keep the old element data
+	 * @param newObject
+	 * @param oldObject
+	 * @return Student DTO
+	 */
 	private StudentDTO mergeObjectData(StudentDTO newObject, StudentDTO oldObject) {
 		Student merged = new Student(
 				newObject.getFirstName() != null ? newObject.getFirstName() : oldObject.getFirstName(),
 				newObject.getLastName() != null ? newObject.getLastName() : oldObject.getLastName(),
 				newObject.getDob() != null ? newObject.getDob() : oldObject.getDob(),
 				newObject.getAge() != null ? newObject.getAge() : oldObject.getAge(),
-				newObject.getGender() != null ? newObject.getGender() : oldObject.getGender(),
-				newObject.getYearEnrolled() != null ? newObject.getYearEnrolled() : oldObject.getYearEnrolled()
+				newObject.getGender() != null ? newObject.getGender() : oldObject.getGender()
 				);
 		return convertToDTO(merged);
 	}

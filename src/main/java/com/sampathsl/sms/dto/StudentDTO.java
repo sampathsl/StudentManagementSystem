@@ -14,7 +14,7 @@ public final class StudentDTO implements Serializable {
 
 	private static final long serialVersionUID = 5545512118451221L;
 
-	private UUID id;
+	private String id;
 	
 	@NotNull(message = "First name can''t be empty!")
     @Size(min = 2, max = 100 , message = "First name length should be between 2 and 100!")
@@ -33,15 +33,12 @@ public final class StudentDTO implements Serializable {
 	
 	@NotNull(message = "Gender can''t be empty!")
 	private String gender;
-	
-	@NotNull(message = "Year enrolled can''t be empty!")
-	private Long yearEnrolled;
 
-	public UUID getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -83,14 +80,6 @@ public final class StudentDTO implements Serializable {
 
 	public void setGender(String gender) {
 		this.gender = gender;
-	}
-
-	public Long getYearEnrolled() {
-		return yearEnrolled;
-	}
-
-	public void setYearEnrolled(Long yearEnrolled) {
-		this.yearEnrolled = yearEnrolled;
 	}
 
 }
