@@ -51,12 +51,8 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public StudentDTO update(StudentDTO newStudentDTO, StudentDTO oldStudentDTO) throws StudentNotFountException {
-		StudentDTO merged = mergeObjectData(newStudentDTO, oldStudentDTO);
-		Student updatedStudent = new Student(merged.getId(),merged.getFirstName(),
-				merged.getLastName(),merged.getDob(),
-				merged.getAge(),merged.getGender());
-		Student updated = studentRepository.save(updatedStudent);
+	public StudentDTO update(StudentDTO newStudentDTO) throws StudentNotFountException {
+		Student updated = studentRepository.save(convertToEntity(newStudentDTO));
         return convertToDTO(updated);
 	}
 	

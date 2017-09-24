@@ -88,20 +88,32 @@ public class StudentController {
 			return getErrors(errors);
         }
 		
-		if(studentDTO.getId() != null){
+		if(studentDTO.getId() == null){
 			throw new CustomErrorTypeException("Unable to update. Student with id " + id + " not found.");
 		}
 		
-		StudentDTO existingStudentDTO = studentServiceImpl.findById(studentDTO.getId());
-		
 		try {
-			studentServiceImpl.update(studentDTO,existingStudentDTO);
+			studentServiceImpl.update(studentDTO);
 			StudentDTO updatedStudentDTO = studentServiceImpl.findById(id);
 			return new ResponseEntity<StudentDTO>(updatedStudentDTO, HttpStatus.OK);
 		} catch (Exception e) {
 			throw new CustomErrorTypeException("Student update is not allowed.Please reload your edit student view.");
 		}
 		
+	}
+
+	@RequestMapping(value = "/students/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> deleteStudent(@Valid @PathVariable("id") String id) throws Exception {
+
+		logger.info("IN delete METHOD");
+
+		try {
+			studentServiceImpl.delete(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			throw new CustomErrorTypeException("Student delete is not allowed.");
+		}
+
 	}
 	
 }

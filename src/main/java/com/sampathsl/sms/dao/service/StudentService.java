@@ -14,6 +14,6 @@ public interface StudentService {
  
     StudentDTO findById(String id) throws Exception;
  
-    StudentDTO update(StudentDTO newStudentDTO, StudentDTO oldStudentDTO) throws Exception;
+    StudentDTO update(StudentDTO newStudentDTO) throws Exception;
 	
 }

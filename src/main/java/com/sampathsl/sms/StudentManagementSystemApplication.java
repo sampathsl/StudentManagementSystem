@@ -25,41 +25,22 @@ public class StudentManagementSystemApplication implements CommandLineRunner {
 			studentService.delete(studentDTO.getId());
 		}
 
-		// save a couple of customers
+		// save a couple of students
 		StudentDTO studentDTO = new StudentDTO();
-		studentDTO.setFirstName("SAMPATH");
-		studentDTO.setLastName("THENNAKOON");
-		studentDTO.setAge(30);
-		studentDTO.setDob("1995-10-10");
+		studentDTO.setFirstName("Ruwan");
+		studentDTO.setLastName("Kulathunga");
+		studentDTO.setAge(10);
+		studentDTO.setDob("2005-10-10");
 		studentDTO.setGender("MALE");
 		studentService.create(studentDTO);
 
 		StudentDTO studentDTO1 = new StudentDTO();
-		studentDTO1.setFirstName("SAMPATH");
-		studentDTO1.setLastName("THENNAKOON");
-		studentDTO1.setAge(31);
-		studentDTO1.setDob("1995-10-10");
+		studentDTO1.setFirstName("Ravidu");
+		studentDTO1.setLastName("Senanayake");
+		studentDTO1.setAge(15);
+		studentDTO1.setDob("2000-10-10");
 		studentDTO1.setGender("MALE");
 		studentService.create(studentDTO1);
-
-		// fetch all customers
-		/*System.out.println("Customers found with findAll():");
-		System.out.println("-------------------------------");
-		for (Customer customer : repository.findAll()) {
-			System.out.println(customer);
-		}
-		System.out.println();
-
-		// fetch an individual customer
-		System.out.println("Customer found with findByFirstName('Alice'):");
-		System.out.println("--------------------------------");
-		System.out.println(repository.findByFirstName("Alice"));
-
-		System.out.println("Customers found with findByLastName('Smith'):");
-		System.out.println("--------------------------------");
-		for (Customer customer : repository.findByLastName("Smith")) {
-			System.out.println(customer);
-		}*/
 
 	}
 
