@@ -1,11 +1,11 @@
-package com.sampathsl.sms.util;
+package com.sampathsl.sms.exception;
 
 
-public class CustomErrorType {
+public class CustomErrorTypeException extends Exception {
 
     private String errorMessage;
 
-    public CustomErrorType(String errorMessage){
+    public CustomErrorTypeException(String errorMessage){
         this.errorMessage = errorMessage;
     }
 

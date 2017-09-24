@@ -1,7 +1,6 @@
 package com.sampathsl.sms.controller;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -22,8 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.sampathsl.sms.dao.service.StudentServiceImpl;
 import com.sampathsl.sms.dto.StudentDTO;
-import com.sampathsl.sms.exception.StudentNotFountException;
-import com.sampathsl.sms.util.CustomErrorType;
+import com.sampathsl.sms.exception.CustomErrorTypeException;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -38,91 +36,71 @@ public class StudentController {
 	public ResponseEntity<List<StudentDTO>> listAllStudents() {
 		
 		logger.info("IN listAllTasks METHOD");
-		
 		List<StudentDTO> studentList = studentServiceImpl.findAll();
-		
         if (studentList.isEmpty()) {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		}
-        
 		return new ResponseEntity<List<StudentDTO>>(studentList, HttpStatus.OK);
 
 	}
 
-	@RequestMapping(value = "/students/{uuid}", method = RequestMethod.GET)
-	public ResponseEntity<?> getStudent(@Valid @PathVariable("uuid") UUID uuid) throws StudentNotFountException {
+	@RequestMapping(value = "/students/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> getStudent(@Valid @PathVariable("id") String id) throws Exception {
 		
 		logger.info("IN getStudent METHOD");
-		
-		StudentDTO studentDTO = studentServiceImpl.findById(uuid.toString());
-		
-		if (studentDTO == null) {
-			return new ResponseEntity(new CustomErrorType("Student with uuid " + uuid
-					+ " not found"), HttpStatus.NOT_FOUND);
-		}
-		
+		StudentDTO studentDTO = studentServiceImpl.findById(id);
 		return new ResponseEntity<StudentDTO>(studentDTO, HttpStatus.OK);
 		
 	}
 	
-	private ResponseEntity<List<CustomErrorType>> getErrors(Errors errors) {
+	private ResponseEntity<List<CustomErrorTypeException>> getErrors(Errors errors) {
 		
         return ResponseEntity.badRequest().body(errors.getAllErrors()
 				.stream()
-				.map(msg -> new CustomErrorType(msg.getDefaultMessage()))
+				.map(msg -> new CustomErrorTypeException(msg.getDefaultMessage()))
 				.collect(Collectors.toList()));
         
 	}
 	
 	@RequestMapping(value = "/students", method = RequestMethod.POST)
 	public ResponseEntity<?> createStudent(@Valid @RequestBody StudentDTO studentDTO, 
-			UriComponentsBuilder ucBuilder, Errors errors) throws StudentNotFountException {
+			UriComponentsBuilder ucBuilder, Errors errors) throws Exception {
 		
 		logger.info("IN createStudent METHOD");
-		
 		if (errors.hasErrors()) {
 			return getErrors(errors);
         }
 
 		StudentDTO studentDTONew = studentServiceImpl.create(studentDTO);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/api/tasks/{uuid}").buildAndExpand(studentDTONew.getId()).toUri());
+		headers.setLocation(ucBuilder.path("/api/tasks/{id}").buildAndExpand(studentDTONew.getId()).toUri());
 		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
 		
 	}
 	
-	@RequestMapping(value = "/students/{uuid}", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateStudent(@Valid @PathVariable("uuid") UUID uuid,
-			@Valid @RequestBody StudentDTO studentDTO, Errors errors) throws StudentNotFountException {
+	@RequestMapping(value = "/students/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateStudent(@Valid @PathVariable("id") String id,
+			@Valid @RequestBody StudentDTO studentDTO, Errors errors) throws Exception {
 		
 		logger.info("IN updateStudent METHOD");
-		
+
 		if (errors.hasErrors()) {
 			return getErrors(errors);
         }
 		
 		if(studentDTO.getId() != null){
-			return new ResponseEntity(new CustomErrorType("Unable to upate. Student with uuid " + uuid + " not found."),
-					HttpStatus.NOT_FOUND);
+			throw new CustomErrorTypeException("Unable to update. Student with id " + id + " not found.");
 		}
 		
-		StudentDTO existingStudentDTO = studentServiceImpl.findById(studentDTO.getId().toString());
-
-		if (existingStudentDTO == null) {
-			return new ResponseEntity(new CustomErrorType("Unable to upate. Student with uuid " + uuid + " not found."),
-					HttpStatus.NOT_FOUND);
-		}
+		StudentDTO existingStudentDTO = studentServiceImpl.findById(studentDTO.getId());
 		
 		try {
 			studentServiceImpl.update(studentDTO,existingStudentDTO);
-			StudentDTO updatedStudentDTO = studentServiceImpl.findById(uuid.toString());
+			StudentDTO updatedStudentDTO = studentServiceImpl.findById(id);
 			return new ResponseEntity<StudentDTO>(updatedStudentDTO, HttpStatus.OK);
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new CustomErrorTypeException("Student update is not allowed.Please reload your edit student view.");
 		}
-		
-		return new ResponseEntity(new CustomErrorType("Student update is not allowed.Please reload your edit student view."),
-					HttpStatus.NOT_FOUND);
 		
 	}
 	

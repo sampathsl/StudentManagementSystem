@@ -22,7 +22,7 @@ public class StudentServiceImpl implements StudentService {
 	private StudentRepository studentRepository;
 
 	@Override
-	public StudentDTO create(StudentDTO student) throws StudentNotFountException {
+	public StudentDTO create(StudentDTO student) throws Exception {
 		Student persisted = studentRepository.save(convertToEntity(student));
         return convertToDTO(persisted);
 	}
@@ -79,8 +79,8 @@ public class StudentServiceImpl implements StudentService {
 	
 	private Student findStudentById(String id) throws StudentNotFountException {
         Optional<Student> result = studentRepository.findById(id);
-        return result.orElseThrow(() -> new StudentNotFountException(id));
- 
+        return result.orElseThrow(() -> new StudentNotFountException("Student not found - id : " + id));
+
     }
 	
 	/**
