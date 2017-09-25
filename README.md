@@ -1,5 +1,5 @@
 # Simple Student Management System
-Simple CRUD application using Spring boot and Mongo DB
+Simple CRUD application using Angular 4 , Spring boot and Mongo DB
 
 ## Getting Started
 
