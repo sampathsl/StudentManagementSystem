@@ -60,14 +60,11 @@ $ git push heroku master
 At last make sure you need to add heroku mongodb addone to your app.
 https://elements.heroku.com/addons/mongolab
 
+** Note : To enable mongo db addone you need payment details.
+
 ## License
 
 This project is licensed under the MIT License
-
-## DEMO
-https://aqueous-bayou-24410.herokuapp.com/
-
-** Note : I could not able to add mongodb addone , because of they are asking payment details.
 
 ## TODO
 
