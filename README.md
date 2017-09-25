@@ -71,7 +71,9 @@ This project is licensed under the MIT License
     1)Add DOB field
     2)Add REST security
     3)Add Student list pagination
+    4)Write frontend and backend test cases
     ...
 
+![Angular 4 MongoDB archicture](http://www.davismol.net/wp-content/uploads/2017/07/000-Spring-Boot-and-AngularJS-4-Web-Application-Architecture-Layers-228x300.png)
 
 
