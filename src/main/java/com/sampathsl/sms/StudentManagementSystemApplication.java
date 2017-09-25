@@ -30,7 +30,7 @@ public class StudentManagementSystemApplication implements CommandLineRunner {
 		studentDTO.setFirstName("Ruwan");
 		studentDTO.setLastName("Kulathunga");
 		studentDTO.setAge(10);
-		studentDTO.setDob("2005-10-10");
+		//studentDTO.setDob("2005-10-10");
 		studentDTO.setGender("MALE");
 		studentService.create(studentDTO);
 
@@ -38,7 +38,7 @@ public class StudentManagementSystemApplication implements CommandLineRunner {
 		studentDTO1.setFirstName("Ravidu");
 		studentDTO1.setLastName("Senanayake");
 		studentDTO1.setAge(15);
-		studentDTO1.setDob("2000-10-10");
+		//studentDTO1.setDob("2000-10-10");
 		studentDTO1.setGender("MALE");
 		studentService.create(studentDTO1);
 

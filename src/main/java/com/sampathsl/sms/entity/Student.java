@@ -11,7 +11,7 @@ public class Student extends BaseEntity implements Serializable {
 	
 	private String firstName;
 	private String lastName;
-	private String dob;
+	//private String dob;
 	private Integer age;
 	private String gender;
 	
@@ -19,21 +19,19 @@ public class Student extends BaseEntity implements Serializable {
         super();
     }
     
-	public Student(String firstName,String lastName,String dob,
+	public Student(String firstName,String lastName,
     		Integer age,String gender) {
     	this.firstName = firstName;
     	this.lastName = lastName;
-    	this.dob = dob;
     	this.age = age;
     	this.gender = gender;
     }
     
-    public Student(String id,String firstName,String lastName,String dob,
+    public Student(String id,String firstName,String lastName,
     		Integer age,String gender) {
     	super(id);
     	this.firstName = firstName;
     	this.lastName = lastName;
-    	this.dob = dob;
     	this.age = age;
     	this.gender = gender;
     }
@@ -54,13 +52,13 @@ public class Student extends BaseEntity implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public String getDob() {
+	/*public String getDob() {
 		return dob;
 	}
 
 	public void setDob(String dob) {
 		this.dob = dob;
-	}
+	}*/
 
 	public Integer getAge() {
 		return age;
@@ -83,7 +81,6 @@ public class Student extends BaseEntity implements Serializable {
 		return "Student{" +
 				"firstName='" + firstName + '\'' +
 				", lastName='" + lastName + '\'' +
-				", dob='" + dob + '\'' +
 				", age=" + age +
 				", gender='" + gender + '\'' +
 				'}';

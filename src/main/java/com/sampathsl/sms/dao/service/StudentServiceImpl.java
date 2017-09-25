@@ -62,7 +62,7 @@ public class StudentServiceImpl implements StudentService {
         dto.setFirstName(model.getFirstName());
         dto.setLastName(model.getLastName());
         dto.setGender(model.getGender());
-        dto.setDob(model.getDob());
+        //dto.setDob(model.getDob());
         dto.setAge(model.getAge());
         return dto;
 	}
@@ -93,14 +93,14 @@ public class StudentServiceImpl implements StudentService {
 	    	Student oldStudent = findStudentById(studentDTO.getId().toString());
 	    	if(oldStudent != null){
 	    		student = new Student(studentDTO.getId(),studentDTO.getFirstName(),
-	    				studentDTO.getLastName(),studentDTO.getDob(),studentDTO.getAge(),studentDTO.getGender());
+	    				studentDTO.getLastName(),studentDTO.getAge(),studentDTO.getGender());
 	    	} else {
-	    		student = new Student(studentDTO.getFirstName(),studentDTO.getLastName(),studentDTO.getDob(),
+	    		student = new Student(studentDTO.getFirstName(),studentDTO.getLastName(),
 	    				studentDTO.getAge(),studentDTO.getGender());
 	    	}
 	    }
 	    else {
-	    	student = new Student(studentDTO.getFirstName(),studentDTO.getLastName(),studentDTO.getDob(),
+	    	student = new Student(studentDTO.getFirstName(),studentDTO.getLastName(),
     				studentDTO.getAge(),studentDTO.getGender());
 	    }
 
@@ -120,7 +120,6 @@ public class StudentServiceImpl implements StudentService {
 		Student merged = new Student(
 				newObject.getFirstName() != null ? newObject.getFirstName() : oldObject.getFirstName(),
 				newObject.getLastName() != null ? newObject.getLastName() : oldObject.getLastName(),
-				newObject.getDob() != null ? newObject.getDob() : oldObject.getDob(),
 				newObject.getAge() != null ? newObject.getAge() : oldObject.getAge(),
 				newObject.getGender() != null ? newObject.getGender() : oldObject.getGender()
 				);

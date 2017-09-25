@@ -24,9 +24,9 @@ public final class StudentDTO implements Serializable {
     @Size(min = 2, max = 100 , message = "Last name length should be between 2 and 100!")
 	private String lastName;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	/*@JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-	private String dob;
+	private String dob;*/
 	
 	@NotNull(message = "Age can''t be empty!")
 	private Integer age;
@@ -58,13 +58,13 @@ public final class StudentDTO implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public String getDob() {
+	/*public String getDob() {
 		return dob;
 	}
 
 	public void setDob(String dob) {
 		this.dob = dob;
-	}
+	}*/
 
 	public Integer getAge() {
 		return age;
