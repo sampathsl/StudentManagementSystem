@@ -21,12 +21,23 @@ public class StudentServiceImpl implements StudentService {
 	@Autowired
 	private StudentRepository studentRepository;
 
+	/**
+	 * Create a new student
+	 * @param student
+	 * @return StudentDTO
+	 * @throws Exception
+	 */
 	@Override
 	public StudentDTO create(StudentDTO student) throws Exception {
 		Student persisted = studentRepository.save(convertToEntity(student));
         return convertToDTO(persisted);
 	}
 
+	/**
+	 * Delete student using id
+	 * @param id
+	 * @throws StudentNotFountException
+	 */
 	@Override
 	public StudentDTO delete(String id) throws StudentNotFountException {
 		Student deleted = findStudentById(id);
@@ -34,6 +45,10 @@ public class StudentServiceImpl implements StudentService {
         return convertToDTO(deleted);
 	}
 
+	/**
+	 * Load all the avalible students
+	 * @return List<StudentDTO>
+	 */
 	@Override
 	public List<StudentDTO> findAll() {
 		List<Student> students = StreamSupport
@@ -44,18 +59,35 @@ public class StudentServiceImpl implements StudentService {
 	     return convertToDTOs(students);
 	}
 
+	/**
+	 * Select student using id
+	 * @param id
+	 * @return StudentDTO
+	 * @throws StudentNotFountException
+	 */
 	@Override
 	public StudentDTO findById(String id) throws StudentNotFountException {
 		Student student = findStudentById(id);
         return convertToDTO(student);
 	}
 
+	/**
+	 * Update existing student
+	 * @param newStudentDTO
+	 * @return
+	 * @throws StudentNotFountException
+	 */
 	@Override
 	public StudentDTO update(StudentDTO newStudentDTO) throws StudentNotFountException {
 		Student updated = studentRepository.save(convertToEntity(newStudentDTO));
         return convertToDTO(updated);
 	}
-	
+
+	/**
+	 * Convert student entity to Student data transfer object
+	 * @param model
+	 * @return StudentDTO
+	 */
 	private StudentDTO convertToDTO(Student model) {
 		StudentDTO dto = new StudentDTO();
         dto.setId(model.getId());
@@ -66,13 +98,23 @@ public class StudentServiceImpl implements StudentService {
         dto.setAge(model.getAge());
         return dto;
 	}
-	
+
+	/**
+	 * Convert liust of student entity object to list of student data transfer objects
+	 * @param models
+	 * @return List<StudentDTO>
+	 */
 	private List<StudentDTO> convertToDTOs(List<Student> models) {
         return models.stream()
                 .map(this::convertToDTO)
                 .collect(toList());
     }
-	
+
+	/**
+	 * Select student using id
+	 * @param id
+	 * @return Student
+	 */
 	private Student findStudentById(String id) throws StudentNotFountException {
         Optional<Student> result = studentRepository.findById(id);
         return result.orElseThrow(() -> new StudentNotFountException("Student not found - id : " + id));

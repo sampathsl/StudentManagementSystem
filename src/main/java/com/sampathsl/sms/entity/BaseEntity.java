@@ -5,6 +5,12 @@ import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
 
+/**
+ * Base entity class
+ * @author SAMPATH
+ *
+ */
+
 public abstract class BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 15235215235123543L;

@@ -10,6 +10,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+/**
+ * Student Data Transfer class
+ * @author SAMPATH
+ */
+
 public final class StudentDTO implements Serializable {
 
 	private static final long serialVersionUID = 5545512118451221L;

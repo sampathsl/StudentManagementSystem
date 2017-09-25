@@ -5,6 +5,12 @@ import java.util.UUID;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * Student entiry class
+ * @author SAMPATH
+ *
+ */
+
 public class Student extends BaseEntity implements Serializable {
 	
 	private static final long serialVersionUID = 51516546545614L;

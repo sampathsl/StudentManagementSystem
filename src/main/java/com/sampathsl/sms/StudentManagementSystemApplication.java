@@ -14,10 +14,19 @@ public class StudentManagementSystemApplication implements CommandLineRunner {
 	@Autowired
 	private StudentService studentService;
 
+	/**
+	 * Spring boot application startup location
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(StudentManagementSystemApplication.class, args);
 	}
 
+	/**
+	 * Pre load the spring boot application data
+	 * @param args
+	 * @throws Exception
+	 */
 	@Override
 	public void run(String... args) throws Exception {
 

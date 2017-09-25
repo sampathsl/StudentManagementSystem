@@ -31,7 +31,11 @@ public class StudentController {
 	
 	@Autowired
 	private StudentServiceImpl studentServiceImpl;
-	
+
+	/**
+	 * Load all the students
+	 * @return ResponseEntity
+	 */
 	@RequestMapping(value = "/students", method = RequestMethod.GET)
 	public ResponseEntity<List<StudentDTO>> listAllStudents() {
 		
@@ -44,6 +48,12 @@ public class StudentController {
 
 	}
 
+	/**
+	 * Load student by id
+	 * @param id
+	 * @return ResponseEntity
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/students/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getStudent(@Valid @PathVariable("id") String id) throws Exception {
 		
@@ -52,7 +62,12 @@ public class StudentController {
 		return new ResponseEntity<StudentDTO>(studentDTO, HttpStatus.OK);
 		
 	}
-	
+
+	/**
+	 * Get all the errors
+	 * @param errors
+	 * @return ResponseEntity
+	 */
 	private ResponseEntity<List<CustomErrorTypeException>> getErrors(Errors errors) {
 		
         return ResponseEntity.badRequest().body(errors.getAllErrors()
@@ -61,7 +76,15 @@ public class StudentController {
 				.collect(Collectors.toList()));
         
 	}
-	
+
+	/**
+	 * Create a new student
+	 * @param studentDTO
+	 * @param ucBuilder
+	 * @param errors
+	 * @return ResponseEntity
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/students", method = RequestMethod.POST)
 	public ResponseEntity<?> createStudent(@Valid @RequestBody StudentDTO studentDTO, 
 			UriComponentsBuilder ucBuilder, Errors errors) throws Exception {
@@ -77,7 +100,15 @@ public class StudentController {
 		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
 		
 	}
-	
+
+	/**
+	 * Update particular student by id
+	 * @param id
+	 * @param studentDTO
+	 * @param errors
+	 * @return ResponseEntity
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/students/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateStudent(@Valid @PathVariable("id") String id,
 			@Valid @RequestBody StudentDTO studentDTO, Errors errors) throws Exception {
@@ -102,6 +133,12 @@ public class StudentController {
 		
 	}
 
+	/**
+	 * Delete student by id
+	 * @param id
+	 * @return ResponseEntity
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/students/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteStudent(@Valid @PathVariable("id") String id) throws Exception {
 
